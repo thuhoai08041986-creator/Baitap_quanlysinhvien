@@ -1,0 +1,136 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+
+    <meta charset="utf-8" />
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0" />
+
+    <title>
+        @ViewData["Title"] - Quản Lý Sinh Viên
+    </title>
+
+    <link rel="stylesheet"
+          href="~/css/site.css"
+          asp-append-version="true" />
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+
+</head>
+
+<body>
+
+    <!-- HEADER -->
+
+    <header class="header">
+
+        <div class="container header-content">
+
+            <a asp-controller="SinhVien"
+               asp-action="Index"
+               class="logo">
+
+                <i class="fa-solid fa-graduation-cap"></i>
+
+                <span>QUẢN LÝ SINH VIÊN</span>
+
+            </a>
+
+
+            <nav class="nav">
+
+                <a asp-controller="SinhVien"
+                   asp-action="Index"
+                   class="nav-link">
+
+                    <i class="fa-solid fa-house"></i>
+
+                    Trang chủ
+
+                </a>
+
+
+                <a asp-controller="SinhVien"
+                   asp-action="Index"
+                   class="nav-link">
+
+                    <i class="fa-solid fa-users"></i>
+
+                    Sinh viên
+
+                </a>
+
+
+                <a asp-controller="SinhVien"
+                   asp-action="Create"
+                   class="nav-link">
+
+                    <i class="fa-solid fa-user-plus"></i>
+
+                    Thêm sinh viên
+
+                </a>
+
+            </nav>
+
+        </div>
+
+    </header>
+
+
+    <!-- MAIN -->
+
+    <main class="main">
+
+        <div class="container">
+
+            @if (TempData["Success"] != null)
+            {
+                <div class="alert-success">
+
+                    <i class="fa-solid fa-circle-check"></i>
+
+                    @TempData["Success"]
+
+                </div>
+            }
+
+            @RenderBody()
+
+        </div>
+
+    </main>
+
+
+    <!-- FOOTER -->
+
+    <footer class="footer">
+
+        <div class="container">
+
+            <p>
+                © 2026 - Website quản lý sinh viên
+            </p>
+
+            <p>
+                ASP.NET Core MVC
+                | Entity Framework Core
+                | SQL Server
+            </p>
+
+        </div>
+
+    </footer>
+
+
+    @await RenderSectionAsync(
+        "Scripts",
+        required: false
+    )
+
+</body>
+
+</html>

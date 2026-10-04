@@ -1,0 +1,124 @@
+﻿@model QuanLySinhVien.Models.SinhVien
+
+@{
+    ViewData["Title"] = "Chi tiết sinh viên";
+}
+
+<div class="detail-card">
+
+    <h1 class="form-title">
+
+        <i class="fa-solid fa-id-card"></i>
+
+        Thông tin sinh viên
+
+    </h1>
+
+
+    <div class="detail-row">
+
+        <div class="detail-label">
+            Mã sinh viên
+        </div>
+
+        <div class="detail-value">
+            @Model.Id
+        </div>
+
+    </div>
+
+
+    <div class="detail-row">
+
+        <div class="detail-label">
+            Họ và tên
+        </div>
+
+        <div class="detail-value">
+            @Model.HoTen
+        </div>
+
+    </div>
+
+
+    <div class="detail-row">
+
+        <div class="detail-label">
+            Email
+        </div>
+
+        <div class="detail-value">
+            @Model.Email
+        </div>
+
+    </div>
+
+
+    <div class="detail-row">
+
+        <div class="detail-label">
+            Số điện thoại
+        </div>
+
+        <div class="detail-value">
+            @Model.SoDienThoai
+        </div>
+
+    </div>
+
+
+    <div class="detail-row">
+
+        <div class="detail-label">
+            Lớp
+        </div>
+
+        <div class="detail-value">
+            @Model.Lop
+        </div>
+
+    </div>
+
+
+    <div class="detail-row">
+
+        <div class="detail-label">
+            Điểm
+        </div>
+
+        <div class="detail-value">
+
+            <span class="score">
+                @Model.Diem
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <div class="form-actions">
+
+        <a asp-action="Edit"
+           asp-route-id="@Model.Id"
+           class="btn btn-warning">
+
+            <i class="fa-solid fa-pen"></i>
+
+            Sửa
+
+        </a>
+
+
+        <a asp-action="Index"
+           class="btn btn-secondary">
+
+            <i class="fa-solid fa-arrow-left"></i>
+
+            Quay lại
+
+        </a>
+
+    </div>
+
+</div>

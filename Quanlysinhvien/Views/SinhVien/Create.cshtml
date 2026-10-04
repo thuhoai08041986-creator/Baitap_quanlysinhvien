@@ -1,0 +1,150 @@
+﻿@model QuanLySinhVien.Models.SinhVien
+
+@{
+    ViewData["Title"] = "Thêm sinh viên";
+}
+
+<div class="form-card">
+
+    <h1 class="form-title">
+
+        <i class="fa-solid fa-user-plus"></i>
+
+        Thêm sinh viên
+
+    </h1>
+
+
+    <form asp-action="Create"
+          method="post">
+
+        <div asp-validation-summary="ModelOnly"
+             class="text-danger">
+        </div>
+
+
+        <div class="form-group">
+
+            <label asp-for="HoTen"
+                   class="form-label">
+            </label>
+
+            <input asp-for="HoTen"
+                   class="form-control"
+                   placeholder="Nhập họ và tên" />
+
+            <span asp-validation-for="HoTen"
+                  class="text-danger">
+            </span>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label asp-for="Email"
+                   class="form-label">
+            </label>
+
+            <input asp-for="Email"
+                   class="form-control"
+                   placeholder="example@gmail.com" />
+
+            <span asp-validation-for="Email"
+                  class="text-danger">
+            </span>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label asp-for="SoDienThoai"
+                   class="form-label">
+            </label>
+
+            <input asp-for="SoDienThoai"
+                   class="form-control"
+                   placeholder="Nhập số điện thoại" />
+
+            <span asp-validation-for="SoDienThoai"
+                  class="text-danger">
+            </span>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label asp-for="Lop"
+                   class="form-label">
+            </label>
+
+            <input asp-for="Lop"
+                   class="form-control"
+                   placeholder="Ví dụ: CNTT1" />
+
+            <span asp-validation-for="Lop"
+                  class="text-danger">
+            </span>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label asp-for="Diem"
+                   class="form-label">
+            </label>
+
+            <input asp-for="Diem"
+                   class="form-control"
+                   type="number"
+                   min="0"
+                   max="10"
+                   step="0.1"
+                   placeholder="0 - 10" />
+
+            <span asp-validation-for="Diem"
+                  class="text-danger">
+            </span>
+
+        </div>
+
+
+        <div class="form-actions">
+
+            <button type="submit"
+                    class="btn btn-primary">
+
+                <i class="fa-solid fa-save"></i>
+
+                Lưu
+
+            </button>
+
+
+            <a asp-action="Index"
+               class="btn btn-secondary">
+
+                <i class="fa-solid fa-arrow-left"></i>
+
+                Quay lại
+
+            </a>
+
+        </div>
+
+    </form>
+
+</div>
+
+
+@section Scripts {
+
+    @{
+        await Html.RenderPartialAsync(
+            "_ValidationScriptsPartial");
+    }
+
+}
