@@ -36,9 +36,10 @@ namespace QuanLySinhVien.Controllers
 
 
         // ============================
-        // CHI TIẾT
+        //xem  CHI TIẾT
         // ============================
         public async Task<IActionResult> Details(int? id)
+        //kiemtra id
         {
             if (id == null)
             {
@@ -57,8 +58,8 @@ namespace QuanLySinhVien.Controllers
         }
 
 
-        // ============================
-        // GET: CREATE
+        // Them sinh vien
+        // GET: CREATE- hienthi
         // ============================
         public IActionResult Create()
         {
@@ -67,7 +68,7 @@ namespace QuanLySinhVien.Controllers
 
 
         // ============================
-        // POST: CREATE
+        // POST: CREATE-capnhat
         // ============================
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -75,7 +76,7 @@ namespace QuanLySinhVien.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.SinhViens.Add(sinhVien);
+                _context.SinhViens.Add(sinhVien);//them sv vao db
 
                 await _context.SaveChangesAsync();
 
@@ -121,6 +122,7 @@ namespace QuanLySinhVien.Controllers
             SinhVien sinhVien)
         {
             if (id != sinhVien.Id)
+                //ktr id co hop le
             {
                 return NotFound();
             }
@@ -129,7 +131,7 @@ namespace QuanLySinhVien.Controllers
             {
                 try
                 {
-                    _context.SinhViens.Update(sinhVien);
+                    _context.SinhViens.Update(sinhVien);//ID da cap nhat
 
                     await _context.SaveChangesAsync();
 
@@ -162,7 +164,7 @@ namespace QuanLySinhVien.Controllers
             {
                 return NotFound();
             }
-
+            //tim sv trong db truyen vao
             var sinhVien = await _context.SinhViens
                 .FirstOrDefaultAsync(sv => sv.Id == id);
 
@@ -183,7 +185,7 @@ namespace QuanLySinhVien.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var sinhVien =
-                await _context.SinhViens.FindAsync(id);
+                await _context.SinhViens.FindAsync(id);//tim trong bang db
 
             if (sinhVien != null)
             {

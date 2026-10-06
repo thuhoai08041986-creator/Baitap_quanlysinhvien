@@ -1,12 +1,17 @@
 using Microsoft.EntityFrameworkCore;
 using QuanLySinhVien.Data;
+using QuanLySinhVien.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// ==========================================
 // Đăng ký MVC
+// ==========================================
 builder.Services.AddControllersWithViews();
 
+// ==========================================
 // Đăng ký Entity Framework Core
+// ==========================================
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(
         builder.Configuration.GetConnectionString("DefaultConnection")
@@ -14,24 +19,37 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 var app = builder.Build();
 
-// Xử lý lỗi khi chạy production
+// ==========================================
+// Cấu hình môi trường
+// ==========================================
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
     app.UseHsts();
 }
 
-// HTTPS
+// ==========================================
+// Middleware có sẵn
+// ==========================================
+
 app.UseHttpsRedirection();
 
-// Cho phép sử dụng CSS, JS, hình ảnh
 app.UseStaticFiles();
 
 app.UseRouting();
 
 app.UseAuthorization();
 
+// ==========================================
+// Middleware tự tạo
+// ==========================================
+
+app.UseMiddleware<RequestLoggingMiddleware>();
+
+// ==========================================
 // Route mặc định
+// ==========================================
+
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=SinhVien}/{action=Index}/{id?}");
