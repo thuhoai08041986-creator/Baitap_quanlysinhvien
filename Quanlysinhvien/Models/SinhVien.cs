@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Http;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace QuanLySinhVien.Models
 {
@@ -32,5 +34,22 @@ namespace QuanLySinhVien.Models
         [Range(0, 10, ErrorMessage = "Điểm phải từ 0 đến 10")]
         [Display(Name = "Điểm")]
         public double Diem { get; set; }
+
+
+        // ==========================================
+        // PHẦN UPLOAD HÌNH ẢNH SINH VIÊN
+        // ==========================================
+
+        // Lưu tên file ảnh vào Database
+        // Ví dụ: 123abc.jpg
+        [Display(Name = "Hình ảnh")]
+        public string? HinhAnh { get; set; }
+
+
+        // Nhận file ảnh người dùng chọn trên giao diện
+        // Không tạo cột ImageFile trong Database
+        [NotMapped]
+        [Display(Name = "Chọn hình ảnh")]
+        public IFormFile? ImageFile { get; set; }
     }
 }

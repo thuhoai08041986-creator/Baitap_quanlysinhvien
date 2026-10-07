@@ -7,35 +7,28 @@
 <div class="page-header">
 
     <div>
-
         <h1 class="page-title">
-
             <i class="fa-solid fa-users"></i>
-
             Quản lý sinh viên
-
         </h1>
 
         <p class="page-description">
-
             Danh sách sinh viên trong hệ thống
-
         </p>
-
     </div>
-
 
     <a asp-action="Create"
        class="btn btn-primary">
-
         <i class="fa-solid fa-plus"></i>
-
         Thêm sinh viên
-
     </a>
 
 </div>
 
+
+<!-- ========================= -->
+<!-- TÌM KIẾM -->
+<!-- ========================= -->
 
 <div class="search-box">
 
@@ -51,20 +44,14 @@
 
         <button type="submit"
                 class="btn btn-primary">
-
             <i class="fa-solid fa-search"></i>
-
             Tìm kiếm
-
         </button>
 
         <a asp-action="Index"
            class="btn btn-secondary">
-
             <i class="fa-solid fa-rotate-left"></i>
-
             Xóa
-
         </a>
 
     </form>
@@ -72,99 +59,113 @@
 </div>
 
 
+<!-- ========================= -->
+<!-- DANH SÁCH SINH VIÊN -->
+<!-- ========================= -->
+
 <div class="table-container">
 
     <table class="student-table">
 
         <thead>
-
             <tr>
-
                 <th>ID</th>
-
+                <th>Hình ảnh</th>
                 <th>Họ tên</th>
-
                 <th>Email</th>
-
                 <th>Số điện thoại</th>
-
                 <th>Lớp</th>
-
                 <th>Điểm</th>
-
                 <th>Thao tác</th>
-
             </tr>
-
         </thead>
-
 
         <tbody>
 
-            @if (Model.Any())
+            @if (Model != null && Model.Any())
             {
                 foreach (var sv in Model)
                 {
                     <tr>
 
+                        <!-- ID -->
                         <td>
                             @sv.Id
                         </td>
 
+                        <!-- HÌNH ẢNH -->
+                        <td>
+                            @if (!string.IsNullOrEmpty(sv.HinhAnh))
+                            {
+                                <img src="@Url.Content("~/images/students/" + sv.HinhAnh)"
+                                     alt="@sv.HoTen"
+                                     width="70"
+                                     height="70"
+                                     style="object-fit:cover;
+                                border-radius:8px;
+                                border:1px solid #ddd;" />
+                            }
+                            else
+                            {
+                                <span style="color:#94a3b8;">
+                                    Chưa có ảnh
+                                </span>
+                            }
+                        </td>
+
+                        <!-- HỌ TÊN -->
                         <td>
                             <strong>
                                 @sv.HoTen
                             </strong>
                         </td>
 
+                        <!-- EMAIL -->
                         <td>
                             @sv.Email
                         </td>
 
+                        <!-- SỐ ĐIỆN THOẠI -->
                         <td>
                             @sv.SoDienThoai
                         </td>
 
+                        <!-- LỚP -->
                         <td>
                             @sv.Lop
                         </td>
 
+                        <!-- ĐIỂM -->
                         <td>
-
                             <span class="score">
                                 @sv.Diem
                             </span>
-
                         </td>
 
+                        <!-- THAO TÁC -->
                         <td>
 
                             <div class="actions">
 
                                 <a asp-action="Details"
                                    asp-route-id="@sv.Id"
-                                   class="btn btn-info">
-
+                                   class="btn btn-info"
+                                   title="Chi tiết">
                                     <i class="fa-solid fa-eye"></i>
-
                                 </a>
-
 
                                 <a asp-action="Edit"
                                    asp-route-id="@sv.Id"
-                                   class="btn btn-warning">
-
+                                   class="btn btn-warning"
+                                   title="Sửa">
                                     <i class="fa-solid fa-pen"></i>
-
                                 </a>
-
 
                                 <a asp-action="Delete"
                                    asp-route-id="@sv.Id"
-                                   class="btn btn-danger">
-
+                                   class="btn btn-danger"
+                                   title="Xóa">
                                     <i class="fa-solid fa-trash"></i>
-
                                 </a>
 
                             </div>
@@ -178,11 +179,11 @@
             {
                 <tr>
 
-                    <td colspan="7"
-                        style="text-align:center;padding:40px;">
+                    <td colspan="8"
+                        style="text-align:center; padding:40px;">
 
                         <i class="fa-solid fa-user-slash"
-                           style="font-size:40px;color:#94a3b8;">
+                           style="font-size:40px; color:#94a3b8;">
                         </i>
 
                         <p style="margin-top:10px;">

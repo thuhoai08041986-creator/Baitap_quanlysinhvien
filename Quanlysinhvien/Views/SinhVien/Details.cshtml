@@ -4,117 +4,116 @@
     ViewData["Title"] = "Chi tiết sinh viên";
 }
 
-<div class="detail-card">
+<div class="form-card">
 
     <h1 class="form-title">
-
-        <i class="fa-solid fa-id-card"></i>
-
+        <i class="fa-solid fa-address-card"></i>
         Thông tin sinh viên
-
     </h1>
 
+    <!-- ============================= -->
+    <!-- HÌNH ẢNH SINH VIÊN -->
+    <!-- ============================= -->
 
-    <div class="detail-row">
+    <div style="text-align:center; margin-bottom:25px;">
 
-        <div class="detail-label">
-            Mã sinh viên
-        </div>
+        @if (!string.IsNullOrEmpty(Model.HinhAnh))
+        {
+            <img src="@Url.Content("~/images/students/" + Model.HinhAnh)"
+                 alt="@Model.HoTen"
+                 width="160"
+                 height="160"
+                 style="
+            object-fit:cover;
+            border-radius:10px;
+            border:3px solid #e2e8f0;
+            box-shadow:0 4px 10px rgba(0,0,0,0.1);
+            " />
+        }
+        else
+        {
+            <div style="
+                width:160px;
+                height:160px;
+                margin:auto;
+                display:flex;
+                align-items:center;
+                justify-content:center;
+                background:#f1f5f9;
+                border-radius:10px;
+                color:#94a3b8;
+                border:2px dashed #cbd5e1;
+                ">
+                <div>
+                    <i class="fa-solid fa-user"
+                       style="font-size:50px;"></i>
 
-        <div class="detail-value">
-            @Model.Id
-        </div>
-
-    </div>
-
-
-    <div class="detail-row">
-
-        <div class="detail-label">
-            Họ và tên
-        </div>
-
-        <div class="detail-value">
-            @Model.HoTen
-        </div>
-
-    </div>
-
-
-    <div class="detail-row">
-
-        <div class="detail-label">
-            Email
-        </div>
-
-        <div class="detail-value">
-            @Model.Email
-        </div>
-
-    </div>
-
-
-    <div class="detail-row">
-
-        <div class="detail-label">
-            Số điện thoại
-        </div>
-
-        <div class="detail-value">
-            @Model.SoDienThoai
-        </div>
+                    <div style="margin-top:10px;">
+                        Chưa có ảnh
+                    </div>
+                </div>
+            </div>
+        }
 
     </div>
 
 
+    <!-- ============================= -->
+    <!-- THÔNG TIN SINH VIÊN -->
+    <!-- ============================= -->
+
     <div class="detail-row">
+        <strong>Mã sinh viên</strong>
+        <span>@Model.Id</span>
+    </div>
 
-        <div class="detail-label">
-            Lớp
-        </div>
+    <div class="detail-row">
+        <strong>Họ và tên</strong>
+        <span>@Model.HoTen</span>
+    </div>
 
-        <div class="detail-value">
-            @Model.Lop
-        </div>
+    <div class="detail-row">
+        <strong>Email</strong>
+        <span>@Model.Email</span>
+    </div>
 
+    <div class="detail-row">
+        <strong>Số điện thoại</strong>
+        <span>@Model.SoDienThoai</span>
+    </div>
+
+    <div class="detail-row">
+        <strong>Lớp</strong>
+        <span>@Model.Lop</span>
+    </div>
+
+    <div class="detail-row">
+        <strong>Điểm</strong>
+        <span class="score">
+            @Model.Diem
+        </span>
     </div>
 
 
-    <div class="detail-row">
+    <!-- ============================= -->
+    <!-- NÚT CHỨC NĂNG -->
+    <!-- ============================= -->
 
-        <div class="detail-label">
-            Điểm
-        </div>
-
-        <div class="detail-value">
-
-            <span class="score">
-                @Model.Diem
-            </span>
-
-        </div>
-
-    </div>
-
-
-    <div class="form-actions">
+    <div style="margin-top:25px;">
 
         <a asp-action="Edit"
            asp-route-id="@Model.Id"
            class="btn btn-warning">
 
             <i class="fa-solid fa-pen"></i>
-
             Sửa
 
         </a>
-
 
         <a asp-action="Index"
            class="btn btn-secondary">
 
             <i class="fa-solid fa-arrow-left"></i>
-
             Quay lại
 
         </a>

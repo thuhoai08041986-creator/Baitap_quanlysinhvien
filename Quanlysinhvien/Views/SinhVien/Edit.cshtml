@@ -7,26 +7,26 @@
 <div class="form-card">
 
     <h1 class="form-title">
-
         <i class="fa-solid fa-user-pen"></i>
-
         Sửa thông tin sinh viên
-
     </h1>
 
-
     <form asp-action="Edit"
-          method="post">
+          method="post"
+          enctype="multipart/form-data">
 
-        <input type="hidden"
-               asp-for="Id" />
+        <!-- ID sinh viên -->
+        <input type="hidden" asp-for="Id" />
 
+        <!-- Giữ lại tên ảnh hiện tại -->
+        <input type="hidden" asp-for="HinhAnh" />
 
         <div asp-validation-summary="ModelOnly"
              class="text-danger">
         </div>
 
 
+        <!-- HỌ TÊN -->
         <div class="form-group">
 
             <label asp-for="HoTen"
@@ -43,6 +43,7 @@
         </div>
 
 
+        <!-- EMAIL -->
         <div class="form-group">
 
             <label asp-for="Email"
@@ -59,6 +60,7 @@
         </div>
 
 
+        <!-- SỐ ĐIỆN THOẠI -->
         <div class="form-group">
 
             <label asp-for="SoDienThoai"
@@ -75,6 +77,7 @@
         </div>
 
 
+        <!-- LỚP -->
         <div class="form-group">
 
             <label asp-for="Lop"
@@ -91,6 +94,7 @@
         </div>
 
 
+        <!-- ĐIỂM -->
         <div class="form-group">
 
             <label asp-for="Diem"
@@ -111,21 +115,95 @@
         </div>
 
 
+        <!-- ================================= -->
+        <!-- HÌNH ẢNH HIỆN TẠI -->
+        <!-- ================================= -->
+
+        <div class="form-group">
+
+            <label class="form-label">
+                Hình ảnh hiện tại
+            </label>
+
+            <div style="margin-top:10px; margin-bottom:15px;">
+
+                @if (!string.IsNullOrEmpty(Model.HinhAnh))
+                {
+                    <img src="@Url.Content("~/images/students/" + Model.HinhAnh)"
+                         alt="@Model.HoTen"
+                         width="150"
+                         height="150"
+                         style="
+                    object-fit:cover;
+                    border-radius:10px;
+                    border:2px solid #ddd;
+                    " />
+                }
+                else
+                {
+                    <div style="
+                        width:150px;
+                        height:150px;
+                        display:flex;
+                        align-items:center;
+                        justify-content:center;
+                        background:#f1f5f9;
+                        border:2px dashed #cbd5e1;
+                        border-radius:10px;
+                        color:#64748b;
+                        ">
+                        Chưa có ảnh
+                    </div>
+                }
+
+            </div>
+
+        </div>
+
+
+        <!-- ================================= -->
+        <!-- CHỌN ẢNH MỚI -->
+        <!-- ================================= -->
+
+        <div class="form-group">
+
+            <label asp-for="ImageFile"
+                   class="form-label">
+                Chọn hình ảnh mới
+            </label>
+
+            <input asp-for="ImageFile"
+                   type="file"
+                   class="form-control"
+                   accept=".jpg,.jpeg,.png" />
+
+            <span asp-validation-for="ImageFile"
+                  class="text-danger">
+            </span>
+
+            <small class="text-muted">
+                Chỉ chấp nhận file JPG, JPEG hoặc PNG.
+                Nếu không chọn ảnh mới, hệ thống sẽ giữ ảnh hiện tại.
+            </small>
+
+        </div>
+
+
+        <!-- NÚT -->
         <div class="form-actions">
 
             <button type="submit"
                     class="btn btn-primary">
 
                 <i class="fa-solid fa-save"></i>
-
                 Lưu thay đổi
 
             </button>
 
-
             <a asp-action="Index"
                class="btn btn-secondary">
 
+                <i class="fa-solid fa-arrow-left"></i>
                 Quay lại
 
             </a>
@@ -141,7 +219,8 @@
 
     @{
         await Html.RenderPartialAsync(
-            "_ValidationScriptsPartial");
+            "_ValidationScriptsPartial"
+        );
     }
 
 }
